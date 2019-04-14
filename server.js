@@ -12,15 +12,14 @@ var schema = buildSchema(`
 `);
 
 var root = {
-    scramble: () => scrambler.scrambler(3, req)
+    scramble: () => scrambler.scrambler(3)
 };
 
 var app = express();
-app.use('/scramble',(req, res) => { express_graphql({
-    schema: schema,
-    rootValue: root,
-    graphiql: process.env.NODE_ENV === 'development'
-    }) (req, res)
-});
+app.use('/scramble', express_graphql({
+  schema: schema,
+  rootValue: root,
+  graphiql: true,
+}));
 
 app.listen(port, () => console.log('Express scrambler running on port : ' + port));
