@@ -1,25 +1,17 @@
-var scrambler = require('./cubeScrambler');
-var express = require('express');
-var express_graphql = require('express-graphql');
-var {buildSchema} = require('graphql');
+let express = require('express');
+let express_graphql = require('express-graphql');
+let {buildSchema} = require('graphql');
+let {scrambleSchema} = require('./schemas/scrambleSchema');
+let {scrambleHandler} = require('./handlers/scrambleHandler');
 
-const port = 8500
-// GraphQl Schema
-var schema = buildSchema(`
-    type Query {
-        scramble: String
-    }
-`);
+let port = 8500
 
-var root = {
-    scramble: () => scrambler.scrambler(3)
-};
+const app = express();
 
-var app = express();
-app.use('/scramble', express_graphql({
-  schema: schema,
-  rootValue: root,
-  graphiql: true,
-}));
+app.use('/scramble', express_graphql(async (request, response) => ({
+  schema: buildSchema(scrambleSchema),
+  rootValue: await scrambleHandler(request, response),
+  graphiql: false
+})));
 
 app.listen(port, () => console.log('Express scrambler running on port : ' + port));
