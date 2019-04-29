@@ -13,4 +13,4 @@ npm start
 
 Headers : `x-password: *******`
 
-The password is read from the value of environement variable : `SCRAMBLER_PASSWWORD`
+The password is read from the value of environement variable : `SCRAMBLER_PASSWORD`
