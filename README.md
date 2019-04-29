@@ -8,7 +8,7 @@ This is a barebone NodeJS [graphQL](https://github.com/graphql/express-graphql) 
 npm install
 npm start
 ```
-##Routes
+## Routes
 `http://127.0.0.1:8500/scramble`
 
 Headers : `x-password: *******`
