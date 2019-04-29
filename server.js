@@ -2,15 +2,16 @@ let express = require('express');
 let express_graphql = require('express-graphql');
 let {buildSchema} = require('graphql');
 let {scrambleSchema} = require('./schemas/scrambleSchema');
-let {scrambleHandler} = require('./handlers/scrambleHandler');
+let {root} = require('./handlers/scrambleHandler');
+let {authentificator} = require('./handlers/authentificator');
 
 let port = 8500
 
 const app = express();
 
-app.use('/scramble', express_graphql(async (request, response) => ({
+app.use('/scramble', authentificator, express_graphql(async (request, response) => ({
   schema: buildSchema(scrambleSchema),
-  rootValue: await scrambleHandler(request, response),
+  rootValue: root,
   graphiql: false
 })));
 
