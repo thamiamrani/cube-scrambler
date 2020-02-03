@@ -10,6 +10,12 @@ npm start
 ```
 ## Routes
 `http://127.0.0.1:8500/scramble`
+Here is a query post exemple over HTTP: 
+`
+{
+  "query": "{scramble}"
+}
+`
 
 Headers : `x-password: *******`
 
